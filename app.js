@@ -23,14 +23,14 @@ app.set("views", path.join(__dirname, "views"));
 app.get("/", (req, res) => {
   res.render("Home");
 });
+app.get("/slopes", async (req, res) => {
+  const slopes = await Slope.find({});
+  res.render("slopes/index", { slopes });
+});
 
-app.get("/newslope", async (req, res) => {
-  const slope = new Slope({
-    title: "Library",
-    description: "Hill in the back of the Library",
-  });
-  await slope.save();
-  res.send(slope);
+app.get("/slopes/:id", async (req, res) => {
+  const slope = await Slope.findById(req.params.id);
+  res.render("slopes/show", { slope });
 });
 
 app.listen(3000, () => {
