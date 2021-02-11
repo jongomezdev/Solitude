@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const cities = require("./cities");
+const { places, descriptors } = require("./seedHelpers");
 const Slope = require("../models/slope");
 
 mongoose.connect("mongodb://localhost:27017/solitude-db", {
@@ -14,15 +15,22 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
+const sample = (array) => array[Math.floor(Math.random() * array.length)];
+
+//Returns a promise because it is an async function
 const seedDB = async () => {
   await Slope.deleteMany({});
   for (let i = 0; i < 50; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const slope = new Slope({
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
+      title: `${sample(descriptors)} ${sample(places)}`,
     });
     await slope.save();
   }
 };
 
-seedDB();
+// Close DB connection
+seedDB().then(() => {
+  mongoose.connection.close();
+});
