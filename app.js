@@ -19,6 +19,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.render("Home");
@@ -26,6 +27,16 @@ app.get("/", (req, res) => {
 app.get("/slopes", async (req, res) => {
   const slopes = await Slope.find({});
   res.render("slopes/index", { slopes });
+});
+
+app.get("/slopes/new", (req, res) => {
+  res.render("slopes/new");
+});
+
+app.post("/slopes", async (req, res) => {
+  const slope = new Slope(req.body.slope); //<-- error - req.body has not been parsed - now parsed on line 22.
+  await slope.save();
+  res.redirect(`/slopes/${slope._id}`);
 });
 
 app.get("/slopes/:id", async (req, res) => {
