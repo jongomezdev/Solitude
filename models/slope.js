@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const SlopeSchema = new Schema({
   title: String,
-  Price: String,
+  image: String,
+  difficulty: Number,
   description: String,
   location: String,
 });

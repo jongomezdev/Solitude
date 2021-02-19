@@ -25,6 +25,7 @@ const seedDB = async () => {
     const slope = new Slope({
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      image: "https://source.unsplash.com/collection/1728605/1600x900",
     });
     await slope.save();
   }
