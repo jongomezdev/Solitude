@@ -1,13 +1,66 @@
 <% layout('layouts/boilerplate') %>
-<form action="/slopes" method="POST">
-  <div>
-    <label for="title">Title</label>
-    <input type="text" id="title" name="slope[title]" />
+<div class="row">
+  <h1 class="text-center">New Slope</h1>
+  <div class="col-6 offset-3">
+    <form action="/slopes" method="POST">
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+          autocomplete="off"
+          class="form-control"
+          type="text"
+          id="title"
+          name="slope[title]"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input
+          autocomplete="off"
+          class="form-control"
+          type="text"
+          id="location"
+          name="slope[location]"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Image Url</label>
+        <input
+          autocomplete="off"
+          class="form-control"
+          type="text"
+          id="image"
+          name="slope[image]"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="difficulty">Difficulty</label>
+        <div class="input-group">
+          <span class="input-group-text" id="difficulty-label">10</span>
+          <input
+            type="text"
+            class="form-control"
+            id="difficulty"
+            placeholder="0"
+            aria-describedby="difficulty-label"
+            name="slope[difficulty]"
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Description</label>
+        <textarea
+          autocomplete="off"
+          class="form-control"
+          type="text"
+          id="description"
+          name="slope[description]"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-info">Add Slope</button>
+      </div>
+    </form>
+    <a href="/slopes">All slopes</a>
   </div>
-  <div>
-    <label for="location">Location</label>
-    <input type="text" id="location" name="slope[location]" />
-  </div>
-  <button>Add Slope</button>
-</form>
-<a href="/slopes">All slopes</a>
+</div>
