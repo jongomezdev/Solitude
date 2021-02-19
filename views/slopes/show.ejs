@@ -1,6 +1,8 @@
 <% layout('layouts/boilerplate') %>
     <h1><%= slope.title %></h1>
     <h2><%= slope.location %></h2>
+    <img src="<%= slope.image %> " alt="">
+    <p><%= slope.description %> </p>
     <p>
       <a href="/slopes/<%= slope._id %>/edit ">Edit</a>
     </p>
@@ -12,4 +14,3 @@
     <footer>
       <a href="/slopes">All slopes</a>
     </footer>
-
