@@ -12,6 +12,11 @@
     <p>
       <a href="/slopes/<%= slope._id %>/edit ">Edit</a>
     </p>
+    <p>
+      <form action="/slopes/<%= slope._id %>?_method=DELETE" method="POST">
+        <button>Delete</button>
+      </form>
+    </p>
     <footer>
       <a href="/slopes">All slopes</a>
     </footer>

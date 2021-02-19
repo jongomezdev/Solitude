@@ -58,6 +58,12 @@ app.put("/slopes/:id", async (req, res) => {
   res.redirect(`/slopes/${slope._id}`);
 });
 
+app.delete("/slopes/:id", async (req, res) => {
+  const { id } = req.params;
+  await Slope.findByIdAndDelete(id);
+  res.redirect("/slopes");
+});
+
 app.listen(3000, () => {
   console.log("Serving on port 3000");
 });
