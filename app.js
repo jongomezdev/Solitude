@@ -20,7 +20,9 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
   res.render("Home");
@@ -48,6 +50,12 @@ app.get("/slopes/:id", async (req, res) => {
 app.get("/slopes/:id/edit", async (req, res) => {
   const slope = await Slope.findById(req.params.id);
   res.render("slopes/edit", { slope });
+});
+
+app.put("/slopes/:id", async (req, res) => {
+  const { id } = req.params;
+  const slope = await Slope.findByIdAndUpdate(id, { ...req.body.slope });
+  res.redirect(`/slopes/${slope._id}`);
 });
 
 app.listen(3000, () => {

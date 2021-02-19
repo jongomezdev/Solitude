@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1>Edit Slope</h1>
-    <form action="/slopes/" method="POST">
+    <form action="/slopes/<%= slope._id %>?_method=PUT" method="POST">
       <div>
         <label for="title">Title</label>
         <input
