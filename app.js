@@ -44,6 +44,11 @@ app.get("/slopes/:id", async (req, res) => {
   res.render("slopes/show", { slope });
 });
 
+app.get("/slopes/:id/edit", async (req, res) => {
+  const slope = await Slope.findById(req.params.id);
+  res.render("slopes/edit", { slope });
+});
+
 app.listen(3000, () => {
   console.log("Serving on port 3000");
 });
