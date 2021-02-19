@@ -11,13 +11,23 @@
     <form action="/slopes/" method="POST">
       <div>
         <label for="title">Title</label>
-        <input type="text" id="title" name="slope[title]" />
+        <input
+          type="text"
+          id="title"
+          name="slope[title]"
+          value="<%= slope.title %> "
+        />
       </div>
       <div>
         <label for="location">Location</label>
-        <input type="text" id="location" name="slope[location]" />
+        <input
+          type="text"
+          id="location"
+          name="slope[location]"
+          value="<%= slope.location %> "
+        />
       </div>
-      <button>Add Slope</button>
+      <button>Update Slope</button>
     </form>
     <a href="/slopes/<%= slope._id %> ">Back to Slope</a>
   </body>
