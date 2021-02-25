@@ -1,16 +1,35 @@
 <% layout('layouts/boilerplate') %>
-    <h1><%= slope.title %></h1>
-    <h2><%= slope.location %></h2>
-    <img src="<%= slope.image %> " alt="">
-    <p><%= slope.description %> </p>
-    <p>
-      <a href="/slopes/<%= slope._id %>/edit ">Edit</a>
-    </p>
-    <p>
-      <form action="/slopes/<%= slope._id %>?_method=DELETE" method="POST">
-        <button>Delete</button>
-      </form>
-    </p>
-    <footer>
-      <a href="/slopes">All slopes</a>
-    </footer>
+
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="card">
+      <img src="<%= slope.image %> " class="card-img-top" alt="" />
+      <div class="card-body">
+        <h5 class="card-title"><%= slope.title %></h5>
+        <p class="card-text"><%= slope.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-muted"><%= slope.location %></li>
+        <li class="list-group-item"><%= slope.difficulty %></li>
+      </ul>
+      <div class="card-body">
+        <a
+          class="card-link btn btn-warning"
+          href="/slopes/<%= slope._id %>/edit "
+          >Edit</a
+        >
+        <form
+          class="d-inline"
+          action="/slopes/<%= slope._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/slopes">All slopes</a>
+</footer>
