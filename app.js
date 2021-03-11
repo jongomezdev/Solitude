@@ -2,7 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
+const Joi = require("joi");
 const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const Slope = require("./models/slope");
 
@@ -46,6 +48,22 @@ app.get("/slopes/new", (req, res) => {
 app.post(
   "/slopes",
   catchAsync(async (req, res, next) => {
+    // if (!req.body.slope) throw new ExpressError("Invalid Data", 400);
+    const slopeSchema = Joi.object({
+      slope: Joi.object({
+        title: Joi.string().required(),
+        difficulty: Joi.number().required().min(0),
+        image: Joi.string().require(),
+        location: Joi.string().require(),
+        description: Joi.string().require(),
+      }).required(),
+    });
+    const { error } = slopeSchema.validate(req.body);
+    if (result.error) {
+      const msg = error.details.map((el) => el.message).join(",");
+      throw new ExpressError(msg, 400);
+    }
+    console.log(result);
     const slope = new Slope(req.body.slope);
     await slope.save();
     res.redirect(`/slopes/${slope._id}`);
@@ -86,8 +104,14 @@ app.delete(
   })
 );
 
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
+
 app.use((err, req, res, next) => {
-  res.send("Something went wrong!");
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Something Went Wrong!";
+  res.status(statusCode).render("error", { err });
 });
 
 app.listen(3000, () => {
