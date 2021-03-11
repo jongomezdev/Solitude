@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">Edit Slope</h1>
   <div class="col-6 offset-3">
-    <form action="/slopes/<%= slope._id %>?_method=PUT" method="POST">
+    <form
+      action="/slopes/<%= slope._id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -12,7 +17,9 @@
           id="title"
           name="slope[title]"
           value="<%= slope.title %> "
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
@@ -23,7 +30,9 @@
           id="location"
           name="slope[location]"
           value="<%= slope.location %> "
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Image Url</label>
@@ -34,7 +43,9 @@
           id="image"
           name="slope[image]"
           value="<%= slope.image %> "
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="difficulty">Difficulty</label>
@@ -48,7 +59,9 @@
             aria-describedby="difficulty-label"
             name="slope[difficulty]"
             value="<%= slope.difficulty %> "
+            required
           />
+          <div class="valid-feedback">Looks good!</div>
         </div>
       </div>
       <div class="mb-3">
@@ -59,9 +72,11 @@
           type="text"
           id="description"
           name="slope[description]"
+          required
         >
 <%= slope.description %></textarea
         >
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Slope</button>
