@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center">New Slope</h1>
   <div class="col-6 offset-3">
-    <form action="/slopes" method="POST">
+    <form action="/slopes" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -11,6 +11,7 @@
           type="text"
           id="title"
           name="slope[title]"
+          required
         />
       </div>
       <div class="mb-3">
@@ -21,6 +22,7 @@
           type="text"
           id="location"
           name="slope[location]"
+          required
         />
       </div>
       <div class="mb-3">
@@ -31,6 +33,7 @@
           type="text"
           id="image"
           name="slope[image]"
+          required
         />
       </div>
       <div class="mb-3">
@@ -44,6 +47,7 @@
             placeholder="0"
             aria-describedby="difficulty-label"
             name="slope[difficulty]"
+            required
           />
         </div>
       </div>
@@ -55,6 +59,7 @@
           type="text"
           id="description"
           name="slope[description]"
+          required
         ></textarea>
       </div>
       <div class="mb-3">
@@ -64,3 +69,29 @@
     <a href="/slopes">All slopes</a>
   </div>
 </div>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll(".validated-form");
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
