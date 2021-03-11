@@ -38,10 +38,14 @@ app.get("/slopes/new", (req, res) => {
   res.render("slopes/new");
 });
 
-app.post("/slopes", async (req, res) => {
-  const slope = new Slope(req.body.slope); //<-- error - req.body has not been parsed - now parsed on line 22.
-  await slope.save();
-  res.redirect(`/slopes/${slope._id}`);
+app.post("/slopes", async (req, res, next) => {
+  try {
+    const slope = new Slope(req.body.slope);
+    await slope.save();
+    res.redirect(`/slopes/${slope._id}`);
+  } catch (e) {
+    next(e);
+  }
 });
 
 app.get("/slopes/:id", async (req, res) => {
@@ -64,6 +68,10 @@ app.delete("/slopes/:id", async (req, res) => {
   const { id } = req.params;
   await Slope.findByIdAndDelete(id);
   res.redirect("/slopes");
+});
+
+app.use((err, req, res, next) => {
+  res.send("Something went wrong!");
 });
 
 app.listen(3000, () => {
